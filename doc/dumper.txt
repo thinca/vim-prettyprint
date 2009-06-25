@@ -1,4 +1,4 @@
-*dumper.txt*	Dump the vim variables.
+*dumper.txt*	Dump vim variables.
 
 Version: 0.1
 Author : thinca <http://d.hatena.ne.jp/thinca/>
@@ -84,7 +84,7 @@ List
 	Dump x  " => [10, [nested element 0]]
 <
 Dictionary
-	List is displayed by same style as |string()|.  If the limit of
+	Dictionary is displayed by same style as |string()|.  If the limit of
 	width is exceeded, it is displayed by the following styles.
 >
 	{
@@ -115,6 +115,9 @@ LIMITATION					*dumper-limitation*
 
 ==============================================================================
 CHANGELOG					*dumper-changelog*
+
+x.x.x	xxxx-xx-xx
+	- Fix typos in this document.
 
 0.1	2009-06-24
 	- Initial version.

@@ -1,4 +1,4 @@
-" Dump the vim variables.
+" Dump vim variables.
 " Version: 0.1
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
