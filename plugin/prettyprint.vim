@@ -13,13 +13,13 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! s:pp(expr, shift, stack)
-  let indent = repeat(s:indent, a:shift)
-  let indentn = indent . s:indent
+  let indent = repeat(s:blank, a:shift)
+  let indentn = indent . s:blank
 
   let appear = index(a:stack, a:expr)
   call add(a:stack, a:expr)
 
-  let width = s:width - strlen(indentn)
+  let width = s:width - s:indent * a:shift
 
 
   let str = ''
@@ -48,8 +48,9 @@ function! s:pp(expr, shift, stack)
         let value = s:pp(a:expr[key], a:shift + 1, a:stack)
         let key = string(strtrans(key))
         let sep = ': '
-        if width < strlen(key . sep . value) && value !~ "\n"
-          let sep = ":\n" . indentn . s:indent
+        if s:indent < strlen(key . sep) &&
+        \ width - s:indent < strlen(key . sep . value) && value !~ "\n"
+          let sep = ":\n" . indentn . s:blank
         endif
         call add(result, key . sep . value)
         unlet value
@@ -84,8 +85,9 @@ function! s:pp(expr, shift, stack)
 endfunction
 
 function! PrettyPrint(...)
-  let s:indent = repeat(' ', exists('g:prettyprint_indent') ?
-  \ g:prettyprint_indent : &l:shiftwidth)
+  let s:indent = exists('g:prettyprint_indent') ?
+  \ g:prettyprint_indent : &l:shiftwidth
+  let s:blank = repeat(' ', s:indent)
   let s:width = (exists('g:prettyprint_width') ?
   \ g:prettyprint_width : &columns) - 1
   let result = []
