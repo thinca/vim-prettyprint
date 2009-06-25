@@ -1,4 +1,4 @@
-*dumper.txt*	Dump vim variables.
+*prettyprint.txt*	Prettyprint vim variables.
 
 Version: 0.1
 Author : thinca <http://d.hatena.ne.jp/thinca/>
@@ -6,55 +6,61 @@ License: Creative Commons Attribution 2.1 Japan License
          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 
 ==============================================================================
-CONTENTS					*dumper-contents*
+CONTENTS					*prettyprint-contents*
 
-Introduction		|dumper-introduction|
-Interface		|dumper-interface|
-  Commands		  |dumper-commands|
-  Functions		  |dumper-functions|
-  Options		  |dumper-options|
-Format Rules		|dumper-format-rules|
-Limitation		|dumper-limitation|
-Changelog		|dumper-changelog|
-
-
-==============================================================================
-INTRODUCTION					*dumper-introduction*
-
-*dumper* is a Vim plugin to dump the vim variable for debug.
+Introduction		|prettyprint-introduction|
+Interface		|prettyprint-interface|
+  Commands		  |prettyprint-commands|
+  Functions		  |prettyprint-functions|
+  Options		  |prettyprint-options|
+Format Rules		|prettyprint-format-rules|
+Limitation		|prettyprint-limitation|
+Changelog		|prettyprint-changelog|
 
 
 ==============================================================================
-INTERFACE					*dumper-interface*
+INTRODUCTION					*prettyprint-introduction*
+
+*prettyprint* is a Vim plugin to prettyprint vim variable for debug.
+
+
+==============================================================================
+INTERFACE					*prettyprint-interface*
 
 ------------------------------------------------------------------------------
-COMMANDS					*dumper-commands*
+COMMANDS					*prettyprint-commands*
 
-:Dump {expr} [, ...]				*:Dump*
-			The command version of |Dump()|.  When two or more
-			values are passed, it is necessary to delimit each
-			value by the comma.
+:PrettyPrint {expr} [, ...]			*:PrettyPrint*
+			The command version of |PrettyPrint()|.  When two or
+			more values are passed, it is necessary to delimit
+			each value by the comma.
+
+:PP {expr} [, ...]				*:PP*
+			This is a short version of |:PrettyPrint|.
 
 ------------------------------------------------------------------------------
-FUNCTIONS					*dumper-functions*
+FUNCTIONS					*prettyprint-functions*
 
-Dump({expr} [, ...])				*Dump()*
+PrettyPrint({expr} [, ...])			*PrettyPrint()*
 			Return {expr} converted to a formatted String.  When
 			two or more values are passed, it is delimited by
 			"\n".
 
-------------------------------------------------------------------------------
-OPTIONS						*dumper-options*
+PP({expr} [, ...])				*PP()*
+			This is a short version of |PrettyPrint()|.
 
-g:dumper_indent					*g:dumper_indent*
+------------------------------------------------------------------------------
+OPTIONS						*prettyprint-options*
+
+g:prettyprint_indent				*g:prettyprint_indent*
 	Width of indent.  If this value is not defined, 'shiftwidth' is used.
 
-g:dumper_width
+g:prettyprint_width				*g:prettyprint_width*
 	Width by return.  If this value is not defined, 'columns' is used.
 
 
 ==============================================================================
-FORMAT RULES					*dumper-format-rules*
+FORMAT RULES					*prettyprint-format-rules*
 
 String
 	|strtrans()| and |string()| are sequentially used.
@@ -81,7 +87,7 @@ List
 >
 	let x = [10]
 	let x += [x]
-	Dump x  " => [10, [nested element 0]]
+	PP x  " => [10, [nested element 0]]
 <
 Dictionary
 	Dictionary is displayed by same style as |string()|.  If the limit of
@@ -105,7 +111,7 @@ Funcref
 
 
 ==============================================================================
-LIMITATION					*dumper-limitation*
+LIMITATION					*prettyprint-limitation*
 
 - String and key of Dictionary are displayed by |strtrans()|.
 
@@ -114,10 +120,12 @@ LIMITATION					*dumper-limitation*
 
 
 ==============================================================================
-CHANGELOG					*dumper-changelog*
+CHANGELOG					*prettyprint-changelog*
 
 x.x.x	xxxx-xx-xx
 	- Fix typos in this document.
+	- Rename the plugin name.
+	  - dumper.vim -> prettyprint.vim
 
 0.1	2009-06-24
 	- Initial version.

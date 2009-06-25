@@ -1,18 +1,18 @@
-" Dump vim variables.
+" Prettyprint vim variables.
 " Version: 0.1
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
 
-if exists('g:loaded_dumper') || v:version < 702
+if exists('g:loaded_prettyprint') || v:version < 702
   finish
 endif
-let g:loaded_dumper = 1
+let g:loaded_prettyprint = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:dump(expr, shift, stack)
+function! s:pp(expr, shift, stack)
   let indent = repeat(s:indent, a:shift)
   let indentn = indent . s:indent
 
@@ -27,14 +27,15 @@ function! s:dump(expr, shift, stack)
     if appear < 0
       let result = []
       for e in a:expr
-        call add(result, s:dump(e, a:shift + 1, a:stack))
+        call add(result, s:pp(e, a:shift + 1, a:stack))
         unlet e
       endfor
       let oneline = '[' . join(result, ', ') . ']'
       if strlen(oneline) < width && oneline !~ "\n"
         let str = oneline
       else
-        let str = "[\n" . join(map(result, 'indentn . v:val'), ",\n") . "\n" . indent . ']'
+        let content = join(map(result, 'indentn . v:val'), ",\n")
+        let str = printf("[\n%s\n%s]", content, indent)
       endif
     else
       let str = '[nested element ' . appear .']'
@@ -44,7 +45,7 @@ function! s:dump(expr, shift, stack)
     if appear < 0
       let result = []
       for key in sort(keys(a:expr))
-        let value = s:dump(a:expr[key], a:shift + 1, a:stack)
+        let value = s:pp(a:expr[key], a:shift + 1, a:stack)
         let key = string(strtrans(key))
         let sep = ': '
         if width < strlen(key . sep . value) && value !~ "\n"
@@ -82,17 +83,24 @@ function! s:dump(expr, shift, stack)
   return str
 endfunction
 
-function! Dump(...)
-  let s:indent = repeat(' ', exists('g:dumper_indent') ? g:dumper_indent : &l:shiftwidth)
-  let s:width = (exists('g:dumper_width') ? g:dumper_width : &columns) - 1
+function! PrettyPrint(...)
+  let s:indent = repeat(' ', exists('g:prettyprint_indent') ?
+  \ g:prettyprint_indent : &l:shiftwidth)
+  let s:width = (exists('g:prettyprint_width') ?
+  \ g:prettyprint_width : &columns) - 1
   let result = []
   for expr in a:000
-    call add(result, s:dump(expr, 0, []))
+    call add(result, s:pp(expr, 0, []))
   endfor
   return join(result, "\n")
 endfunction
 
-command! -nargs=+ -complete=expression Dump echo Dump(<args>)
+function! PP(...)
+  return call('PrettyPrint', a:000)
+endfunction
+
+command! -nargs=+ -complete=expression PrettyPrint echo PrettyPrint(<args>)
+command! -nargs=+ -complete=expression PP echo PP(<args>)
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
