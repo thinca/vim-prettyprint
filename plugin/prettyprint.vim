@@ -1,5 +1,5 @@
 " Prettyprint vim variables.
-" Version: 0.2
+" Version: 0.2.1
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -26,9 +26,9 @@ function! s:pp(expr, shift, stack)
   if type(a:expr) == type([])
     if appear < 0
       let result = []
-      for e in a:expr
-        call add(result, s:pp(e, a:shift + 1, a:stack))
-        unlet e
+      for Expr in a:expr
+        call add(result, s:pp(Expr, a:shift + 1, a:stack))
+        unlet Expr
       endfor
       let oneline = '[' . join(result, ', ') . ']'
       if strlen(oneline) < width && oneline !~ "\n"
@@ -91,8 +91,8 @@ function! PrettyPrint(...)
   let s:width = (exists('g:prettyprint_width') ?
   \ g:prettyprint_width : &columns) - 1
   let result = []
-  for expr in a:000
-    call add(result, s:pp(expr, 0, []))
+  for Expr in a:000
+    call add(result, s:pp(Expr, 0, []))
   endfor
   return join(result, "\n")
 endfunction
