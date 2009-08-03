@@ -1,5 +1,5 @@
 " Prettyprint vim variables.
-" Version: 0.2.1
+" Version: 0.2.2
 " Author : thinca <http://d.hatena.ne.jp/thinca/>
 " License: Creative Commons Attribution 2.1 Japan License
 "          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -93,6 +93,7 @@ function! PrettyPrint(...)
   let result = []
   for Expr in a:000
     call add(result, s:pp(Expr, 0, []))
+    unlet Expr
   endfor
   return join(result, "\n")
 endfunction
