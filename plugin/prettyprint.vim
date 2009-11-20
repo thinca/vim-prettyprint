@@ -85,11 +85,11 @@ function! s:pp(expr, shift, stack)
 endfunction
 
 function! PrettyPrint(...)
-  let s:indent = exists('g:prettyprint_indent') ?
-  \ g:prettyprint_indent : &l:shiftwidth
+  let s:indent = type(g:prettyprint_indent) == type('') ?
+  \              eval(g:prettyprint_indent) : g:prettyprint_indent
   let s:blank = repeat(' ', s:indent)
-  let s:width = (exists('g:prettyprint_width') ?
-  \ g:prettyprint_width : &columns) - 1
+  let s:width = ( type(g:prettyprint_width) == type('') ?
+  \               eval(g:prettyprint_width) : g:prettyprint_width ) - 1
   let result = []
   for Expr in a:000
     call add(result, s:pp(Expr, 0, []))
@@ -101,6 +101,14 @@ endfunction
 function! PP(...)
   return call('PrettyPrint', a:000)
 endfunction
+
+if !exists('g:prettyprint_indent')
+  let g:prettyprint_indent = '&l:shiftwidth'
+endif
+
+if !exists('g:prettyprint_width')
+  let g:prettyprint_width = '&columns'
+endif
 
 command! -nargs=+ -complete=expression PrettyPrint echo PrettyPrint(<args>)
 command! -nargs=+ -complete=expression PP echo PP(<args>)

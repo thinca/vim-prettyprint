@@ -53,10 +53,12 @@ PP({expr} [, ...])				*PP()*
 OPTIONS						*prettyprint-options*
 
 g:prettyprint_indent				*g:prettyprint_indent*
-	Width of indent.  If this value is not defined, 'shiftwidth' is used.
+	Width of indent.  If the type of value is String, |eval()| is applied.
+	The default value is "&l:shiftwidth".
 
 g:prettyprint_width				*g:prettyprint_width*
-	Width by return.  If this value is not defined, 'columns' is used.
+	Width by return.  If the type of value is String, |eval()| is applied.
+	The default value is "&columns".
 
 
 ==============================================================================
@@ -121,6 +123,11 @@ LIMITATION					*prettyprint-limitation*
 
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
+
+x.x.x	xxxx.xx.xx
+	- Changed the treatment of options.
+	  - Applies the eval() function if the type of value is String.
+
 
 0.2.2	2009-08-03
 	- Fixed a bug that doesn't work if the values with different type is
