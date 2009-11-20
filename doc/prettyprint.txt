@@ -8,20 +8,21 @@ License: Creative Commons Attribution 2.1 Japan License
 ==============================================================================
 CONTENTS					*prettyprint-contents*
 
-Introduction		|prettyprint-introduction|
-Interface		|prettyprint-interface|
-  Commands		  |prettyprint-commands|
-  Functions		  |prettyprint-functions|
-  Options		  |prettyprint-options|
-Format Rules		|prettyprint-format-rules|
-Limitation		|prettyprint-limitation|
-Changelog		|prettyprint-changelog|
+INTRODUCTION			|prettyprint-introduction|
+INTERFACE			|prettyprint-interface|
+  COMMANDS			  |prettyprint-commands|
+  FUNCTIONS			  |prettyprint-functions|
+OPTIONS				|prettyprint-options|
+FORMAT RULES			|prettyprint-format-rules|
+LIMITATION			|prettyprint-limitation|
+CHANGELOG			|prettyprint-changelog|
 
 
 ==============================================================================
 INTRODUCTION					*prettyprint-introduction*
 
 *prettyprint* is a Vim plugin to prettyprint vim variable for debug.
+
 
 
 ==============================================================================
@@ -49,7 +50,9 @@ PrettyPrint({expr} [, ...])			*PrettyPrint()*
 PP({expr} [, ...])				*PP()*
 			This is a short version of |PrettyPrint()|.
 
-------------------------------------------------------------------------------
+
+
+==============================================================================
 OPTIONS						*prettyprint-options*
 
 g:prettyprint_indent				*g:prettyprint_indent*
@@ -59,6 +62,7 @@ g:prettyprint_indent				*g:prettyprint_indent*
 g:prettyprint_width				*g:prettyprint_width*
 	Width by return.  If the type of value is String, |eval()| is applied.
 	The default value is "&columns".
+
 
 
 ==============================================================================
@@ -112,6 +116,7 @@ Funcref
 	displayed by |:function-verbose|.
 
 
+
 ==============================================================================
 LIMITATION					*prettyprint-limitation*
 
@@ -119,6 +124,7 @@ LIMITATION					*prettyprint-limitation*
 
 - In internal, the recursive call is used.  This is subject to the limitation
   of it. See 'maxfuncdepth'.
+
 
 
 ==============================================================================
