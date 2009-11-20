@@ -12,14 +12,14 @@ let g:loaded_prettyprint = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:pp(expr, shift, stack)
+function! s:pp(expr, shift, width, stack)
   let indent = repeat(s:blank, a:shift)
   let indentn = indent . s:blank
 
   let appear = index(a:stack, a:expr)
   call add(a:stack, a:expr)
 
-  let width = s:width - s:indent * a:shift
+  let width = s:width - a:width - s:indent * a:shift
 
 
   let str = ''
@@ -27,7 +27,7 @@ function! s:pp(expr, shift, stack)
     if appear < 0
       let result = []
       for Expr in a:expr
-        call add(result, s:pp(Expr, a:shift + 1, a:stack))
+        call add(result, s:pp(Expr, a:shift + 1, 0, a:stack))
         unlet Expr
       endfor
       let oneline = '[' . join(result, ', ') . ']'
@@ -45,14 +45,14 @@ function! s:pp(expr, shift, stack)
     if appear < 0
       let result = []
       for key in sort(keys(a:expr))
-        let value = s:pp(a:expr[key], a:shift + 1, a:stack)
-        let key = string(strtrans(key))
+        let skey = string(strtrans(key))
         let sep = ': '
-        if s:indent < strlen(key . sep) &&
-        \ width - s:indent < strlen(key . sep . value) && value !~ "\n"
+        let value = s:pp(a:expr[key], a:shift + 1, strlen(skey . sep), a:stack)
+        if s:indent < strlen(skey . sep) &&
+        \ width - s:indent < strlen(skey . sep . value) && value !~ "\n"
           let sep = ":\n" . indentn . s:blank
         endif
-        call add(result, key . sep . value)
+        call add(result, skey . sep . value)
         unlet value
       endfor
       let oneline = '{' . join(result, ', ') . '}'
@@ -92,7 +92,7 @@ function! PrettyPrint(...)
   \               eval(g:prettyprint_width) : g:prettyprint_width ) - 1
   let result = []
   for Expr in a:000
-    call add(result, s:pp(Expr, 0, []))
+    call add(result, s:pp(Expr, 0, 0, []))
     unlet Expr
   endfor
   return join(result, "\n")

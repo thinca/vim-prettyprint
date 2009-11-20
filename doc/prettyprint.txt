@@ -133,6 +133,7 @@ CHANGELOG					*prettyprint-changelog*
 x.x.x	xxxx.xx.xx
 	- Changed the treatment of options.
 	  - Applies the eval() function if the type of value is String.
+	- Improved the return algorithm.
 
 
 0.2.2	2009-08-03
