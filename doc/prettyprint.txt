@@ -1,6 +1,6 @@
 *prettyprint.txt*	Prettyprint vim variables.
 
-Version: 0.2.2
+Version: 0.3.0
 Author : thinca <thinca+vim@gmail.com>
 License: Creative Commons Attribution 2.1 Japan License
          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -130,7 +130,7 @@ LIMITATION					*prettyprint-limitation*
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
 
-x.x.x	xxxx.xx.xx
+0.3.0	2009-11-20
 	- Changed the treatment of options.
 	  - Applies the eval() function if the type of value is String.
 	- Improved the return algorithm.
