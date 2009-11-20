@@ -144,12 +144,12 @@ x.x.x	xxxx.xx.xx
 	- Fixed a bug that doesn't work if |Funcref| was put on other than the
 	  dictionary.
 
-0.2	2009-06-25
+0.2.0	2009-06-25
 	- Fix typos in this document.
 	- Rename the plugin name.
 	  - dumper.vim -> prettyprint.vim
 
-0.1	2009-06-24
+0.1.0	2009-06-24
 	- Initial version.
 
 
