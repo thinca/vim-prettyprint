@@ -27,6 +27,9 @@ INTRODUCTION					*prettyprint-introduction*
 Requirements:
 - Vim 7.2 or later
 
+Latest version:
+http://github.com/thinca/vim-prettyprint
+
 
 
 ==============================================================================
