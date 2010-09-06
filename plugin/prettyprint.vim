@@ -110,7 +110,7 @@ if !exists('g:prettyprint_width')
   let g:prettyprint_width = '&columns'
 endif
 
-command! -nargs=+ -complete=expression PrettyPrint echo PrettyPrint(<args>)
+command! -nargs=+ -complete=expression PrettyPrint PP <args>
 command! -nargs=+ -complete=expression PP echo PP(<args>)
 
 let &cpo = s:save_cpo
