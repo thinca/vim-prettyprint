@@ -1,6 +1,6 @@
 *prettyprint.txt*	Prettyprint vim variables.
 
-Version: 0.3.0
+Version: 0.3.1
 Author : thinca <thinca+vim@gmail.com>
 License: Creative Commons Attribution 2.1 Japan License
          <http://creativecommons.org/licenses/by/2.1/jp/deed.en>
@@ -140,7 +140,7 @@ LIMITATION					*prettyprint-limitation*
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
 
-x.x.x	xxxx-xx-xx
+0.3.1	2010-09-07
 	- Added the buffer local version of options.
 	  - |b:prettyprint_indent|
 	  - |b:prettyprint_width|
