@@ -31,12 +31,13 @@ INTERFACE					*prettyprint-interface*
 ------------------------------------------------------------------------------
 COMMANDS					*prettyprint-commands*
 
-:PrettyPrint {expr} [, ...]			*:PrettyPrint*
+:PrettyPrint[!] {expr} [, ...]			*:PrettyPrint*
 			The command version of |PrettyPrint()|.  When two or
 			more values are passed, it is necessary to delimit
-			each value by the comma.
+			each value by the comma.  If [!] is given, the output
+			is saved to the |message-history| by using |:echomsg|.
 
-:PP {expr} [, ...]				*:PP*
+:PP[!] {expr} [, ...]				*:PP*
 			This is a short version of |:PrettyPrint|.
 
 ------------------------------------------------------------------------------
@@ -136,6 +137,7 @@ x.x.x	xxxx-xx-xx
 	- Added the buffer local version of options.
 	  - |b:prettyprint_indent|
 	  - |b:prettyprint_width|
+	- |:PrettyPrint| accepts "!" for saving the output.
 
 0.3.0	2009-11-20
 	- Changed the treatment of options.

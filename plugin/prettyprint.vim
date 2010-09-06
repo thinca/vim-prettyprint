@@ -90,6 +90,16 @@ function! s:option(name)  " {{{2
   return type(opt) == type('') ? eval(opt) : opt
 endfunction
 
+function! s:echo(str, msg)  " {{{2
+  if a:msg
+    for s in split(a:str, "\n")
+      echomsg s
+    endfor
+  else
+    echo a:str
+  endif
+endfunction
+
 function! PrettyPrint(...)
   let s:indent = s:option('indent')
   let s:blank = repeat(' ', s:indent)
@@ -114,8 +124,8 @@ if !exists('g:prettyprint_width')
   let g:prettyprint_width = '&columns'
 endif
 
-command! -nargs=+ -complete=expression PrettyPrint PP <args>
-command! -nargs=+ -complete=expression PP echo PP(<args>)
+command! -nargs=+ -bang -complete=expression PrettyPrint PP<bang> <args>
+command! -nargs=+ -bang -complete=expression PP call s:echo(PP(<args>), <bang>0)
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
