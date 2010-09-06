@@ -84,12 +84,16 @@ function! s:pp(expr, shift, width, stack)
   return str
 endfunction
 
+function! s:option(name)  " {{{2
+  let name = 'prettyprint_' . a:name
+  let opt = has_key(b:, name) ? b:[name] : g:[name]
+  return type(opt) == type('') ? eval(opt) : opt
+endfunction
+
 function! PrettyPrint(...)
-  let s:indent = type(g:prettyprint_indent) == type('') ?
-  \              eval(g:prettyprint_indent) : g:prettyprint_indent
+  let s:indent = s:option('indent')
   let s:blank = repeat(' ', s:indent)
-  let s:width = ( type(g:prettyprint_width) == type('') ?
-  \               eval(g:prettyprint_width) : g:prettyprint_width ) - 1
+  let s:width = s:option('width') - 1
   let result = []
   for Expr in a:000
     call add(result, s:pp(Expr, 0, 0, []))
