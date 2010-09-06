@@ -24,6 +24,10 @@ INTRODUCTION					*prettyprint-introduction*
 *prettyprint* is a Vim plugin to prettyprint vim variable for debug.
 
 
+Requirements:
+- Vim 7.2 or later
+
+
 
 ==============================================================================
 INTERFACE					*prettyprint-interface*
