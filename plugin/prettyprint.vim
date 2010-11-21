@@ -97,13 +97,17 @@ endfunction
 
 
 
-function! s:echo(str, msg)  " {{{2
+function! s:echo(str, msg, expr)  " {{{2
+  let str = a:str
+  if g:prettyprint_show_expression
+    let str = a:expr . ' = ' . str
+  endif
   if a:msg
-    for s in split(a:str, "\n")
+    for s in split(str, "\n")
       echomsg s
     endfor
   else
-    echo a:str
+    echo str
   endif
 endfunction
 
@@ -138,11 +142,15 @@ if !exists('g:prettyprint_width')  " {{{2
   let g:prettyprint_width = '&columns'
 endif
 
+if !exists('g:prettyprint_show_expression')  " {{{2
+  let g:prettyprint_show_expression = 0
+endif
+
 
 
 " commands. {{{1
 command! -nargs=+ -bang -complete=expression PrettyPrint PP<bang> <args>
-command! -nargs=+ -bang -complete=expression PP call s:echo(PP(<args>), <bang>0)
+command! -nargs=+ -bang -complete=expression PP call s:echo(PP(<args>), <bang>0, <q-args>)
 
 
 
