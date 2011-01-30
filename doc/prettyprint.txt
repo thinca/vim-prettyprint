@@ -73,6 +73,11 @@ b:prettyprint_width				*b:prettyprint_width*
 	Width by return.  If the type of value is String, |eval()| is applied.
 	The default value is "&columns".
 
+g:prettyprint_show_expression	*g:prettyprint_show_expression*
+    Show also expression not only evaluated value.
+    e.g.: If this variable is true,
+    ":PP 1 + 1" outputs "1 + 1 = 2".
+    If false, it just outputs "2".
 
 
 ==============================================================================
