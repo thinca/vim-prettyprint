@@ -140,6 +140,22 @@ LIMITATION					*prettyprint-limitation*
 - In internal, the recursive call is used.  This is subject to the limitation
   of it. See 'maxfuncdepth'.
 
+- Can't access a script local variable/function via the command.
+  - This is specification of Vim.  Use |PP()| instead.
+>
+	let s:var = 0
+	function s:dump(var)
+	  let l:var = 0
+	  " OK
+	  PP a:var
+	  " OK
+	  PP l:var
+	  " NG
+	  PP s:var
+	  " OK
+	  echo PP(s:var)
+	endfunction
+
 
 
 ==============================================================================
