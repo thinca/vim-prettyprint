@@ -77,7 +77,14 @@ function! s:pp(expr, shift, width, stack)  " {{{2
       redir END
       let str = func
     elseif type(a:expr) == type('')
-      let str = string(strtrans(a:expr))
+      if a:expr =~# "\n"
+        let strings = map(split(a:expr, '\n'), 'string(strtrans(v:val))')
+        let str = "join([\n" . indentn .
+        \ join(strings, ",\n" . indentn) .
+        \ "\n" . indent . '], "\n")'
+      else
+        let str = string(strtrans(a:expr))
+      endif
     else
       let str = string(a:expr)
     endif
