@@ -73,6 +73,14 @@ b:prettyprint_width				*b:prettyprint_width*
 	Width by return.  If the type of value is String, |eval()| is applied.
 	The default value is "&columns".
 
+g:prettyprint_string				*g:prettyprint_string*
+b:prettyprint_string				*b:prettyprint_string*
+	Format of string.  This is a |List| of the following values.
+	- "split"
+	- "raw"
+	See |prettyprint-format-rules-String| for details.
+	The default value is [] (empty list).
+
 g:prettyprint_show_expression	*g:prettyprint_show_expression*
 	Show also expression not only evaluated value.
 	e.g.: If this variable is true,
@@ -84,7 +92,16 @@ g:prettyprint_show_expression	*g:prettyprint_show_expression*
 FORMAT RULES					*prettyprint-format-rules*
 
 String					*prettyprint-format-rules-String*
-	|strtrans()| and |string()| are sequentially used.
+	See also |g:prettyprint_string|.
+	By default, |strtrans()| and |string()| are sequentially used.
+	If |g:prettyprint_string| contains "raw", don't use |strtrans()|.
+	If |g:prettyprint_string| contains "split" and the string has two or
+	more lines, it is displayed by the following styles.
+>
+	join([
+	  'line1',
+	  'line2'
+	])
 
 Number					*prettyprint-format-rules-Number*
 Float					*prettyprint-format-rules-Float*
