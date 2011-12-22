@@ -77,11 +77,14 @@ function! s:pp(expr, shift, width, stack)  " {{{2
       redir END
       let str = func
     elseif type(a:expr) == type('')
-      if a:expr =~# "\n"
-        let strings = map(split(a:expr, '\n'), 'string(strtrans(v:val))')
+      let str = a:expr
+      if a:expr =~# "\n" && s:string_split
+        let expr = s:string_raw ? 'string(v:val)' : 'string(strtrans(v:val))'
         let str = "join([\n" . indentn .
-        \ join(strings, ",\n" . indentn) .
+        \ join(map(split(a:expr, '\n'), expr), ",\n" . indentn) .
         \ "\n" . indent . '], "\n")'
+      elseif s:string_raw
+        let str = string(a:expr)
       else
         let str = string(strtrans(a:expr))
       endif
@@ -124,6 +127,10 @@ function! PrettyPrint(...)  " {{{2
   let s:indent = s:option('indent')
   let s:blank = repeat(' ', s:indent)
   let s:width = s:option('width') - 1
+  let string = s:option('string')
+  let strlist = type(string) is type([]) ? string : [string]
+  let s:string_split = 0 <= index(strlist, 'split')
+  let s:string_raw = 0 <= index(strlist, 'raw')
   let result = []
   for Expr in a:000
     call add(result, s:pp(Expr, 0, 0, []))
@@ -147,6 +154,10 @@ endif
 
 if !exists('g:prettyprint_width')  " {{{2
   let g:prettyprint_width = '&columns'
+endif
+
+if !exists('g:prettyprint_string')  " {{{2
+  let g:prettyprint_string = []
 endif
 
 if !exists('g:prettyprint_show_expression')  " {{{2
