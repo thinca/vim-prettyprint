@@ -73,11 +73,15 @@ function! s:pp(expr, shift, width, stack)
       if funcname =~# '^\d\+$'
         let funcname = '{' . funcname . '}'
       endif
-      redir => func
-      " Don't print a definition location if &verbose == 1.
-      silent! execute (&verbose - 1) 'verbose function' funcname
-      redir END
-      let str = func
+      if exists('*' . funcname)
+        redir => func
+        " Don't print a definition location if &verbose == 1.
+        silent! execute (&verbose - 1) 'verbose function' funcname
+        redir END
+        let str = func
+      else
+        let str = string(a:expr)
+      endif
     elseif type(a:expr) == type('')
       let str = a:expr
       if a:expr =~# "\n" && s:string_split
