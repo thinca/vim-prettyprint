@@ -1,5 +1,5 @@
 " Prettyprint vim variables.
-" Version: 0.3.1
+" Version: 0.3.2
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
 
