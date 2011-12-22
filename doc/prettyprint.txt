@@ -83,14 +83,14 @@ g:prettyprint_show_expression	*g:prettyprint_show_expression*
 ==============================================================================
 FORMAT RULES					*prettyprint-format-rules*
 
-String
+String					*prettyprint-format-rules-String*
 	|strtrans()| and |string()| are sequentially used.
 
-Number
-Float
+Number					*prettyprint-format-rules-Number*
+Float					*prettyprint-format-rules-Float*
 	|string()| is used.
 
-List
+List					*prettyprint-format-rules-List*
 	List is displayed by same style as |string()|.  If the limit of
 	width is exceeded, it is displayed by the following styles.
 >
@@ -110,7 +110,7 @@ List
 	let x += [x]
 	PP x  " => [10, [nested element 0]]
 <
-Dictionary
+Dictionary				*prettyprint-format-rules-Dictionary*
 	Dictionary is displayed by same style as |string()|.  If the limit of
 	width is exceeded, it is displayed by the following styles.
 >
@@ -124,7 +124,7 @@ Dictionary
 	If nested element is appear, it is displayed by same style as List,
 	but it use brace instead of bracket.
 
-Funcref
+Funcref					*prettyprint-format-rules-Funcref*
 	Normally, |string()| is used.  If 'verbose' is one, the definition of
 	function is displayed by using |:function|.  If 'verbose' is two or
 	more, in addition, the file which the function was defined at last is
