@@ -13,9 +13,8 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-
 " functions. {{{1
-function! s:pp(expr, shift, width, stack)  " {{{2
+function! s:pp(expr, shift, width, stack)
   let indent = repeat(s:blank, a:shift)
   let indentn = indent . s:blank
 
@@ -23,7 +22,6 @@ function! s:pp(expr, shift, width, stack)  " {{{2
   call add(a:stack, a:expr)
 
   let width = s:width - a:width - s:indent * a:shift
-
 
   let str = ''
   if type(a:expr) == type([])
@@ -97,17 +95,13 @@ function! s:pp(expr, shift, width, stack)  " {{{2
   return str
 endfunction
 
-
-
-function! s:option(name)  " {{{2
+function! s:option(name)
   let name = 'prettyprint_' . a:name
   let opt = has_key(b:, name) ? b:[name] : g:[name]
   return type(opt) == type('') ? eval(opt) : opt
 endfunction
 
-
-
-function! s:echo(str, msg, expr)  " {{{2
+function! s:echo(str, msg, expr)
   let str = a:str
   if g:prettyprint_show_expression
     let str = a:expr . ' = ' . str
@@ -123,7 +117,7 @@ endfunction
 
 
 
-function! PrettyPrint(...)  " {{{2
+function! PrettyPrint(...)
   let s:indent = s:option('indent')
   let s:blank = repeat(' ', s:indent)
   let s:width = s:option('width') - 1
@@ -139,12 +133,9 @@ function! PrettyPrint(...)  " {{{2
   return join(result, "\n")
 endfunction
 
-
-
-function! PP(...)  " {{{2
+function! PP(...)
   return call('PrettyPrint', a:000)
 endfunction
-
 
 
 " options. {{{1
@@ -165,11 +156,9 @@ if !exists('g:prettyprint_show_expression')  " {{{2
 endif
 
 
-
 " commands. {{{1
 command! -nargs=+ -bang -complete=expression PrettyPrint PP<bang> <args>
 command! -nargs=+ -bang -complete=expression PP call s:echo(PP(<args>), <bang>0, <q-args>)
-
 
 
 let &cpo = s:save_cpo
