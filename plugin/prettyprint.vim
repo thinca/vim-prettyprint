@@ -70,6 +70,9 @@ function! s:pp(expr, shift, width, stack)
   else
     if &verbose && type(a:expr) == type(function('tr'))
       let funcname = matchstr(string(a:expr), '^function(''\zs.*\ze'')$')
+      if funcname =~# '^\d\+$'
+        let funcname = '{' . funcname . '}'
+      endif
       redir => func
       " Don't print a definition location if &verbose == 1.
       silent! execute (&verbose - 1) 'verbose function' funcname
