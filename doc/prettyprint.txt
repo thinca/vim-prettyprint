@@ -178,6 +178,9 @@ LIMITATION					*prettyprint-limitation*
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
 
+x.x.x	xxxx-xx-xx
+	- Added |g:prettyprint_string| option.
+
 0.3.1	2010-09-07
 	- Added the buffer local version of options.
 	  - |b:prettyprint_indent|
