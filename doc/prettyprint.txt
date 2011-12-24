@@ -151,7 +151,7 @@ Funcref					*prettyprint-format-rules-Funcref*
 ==============================================================================
 LIMITATION					*prettyprint-limitation*
 
-- String and key of Dictionary are displayed by |strtrans()|.
+- Key of dictionary is displayed by |strtrans()|.
 
 - In internal, the recursive call is used.  This is subject to the limitation
   of it. See 'maxfuncdepth'.
