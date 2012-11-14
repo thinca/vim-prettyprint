@@ -86,7 +86,7 @@ function! s:pp(expr, shift, width, stack)
       if a:expr =~# "\n" && s:string_split
         let expr = s:string_raw ? 'string(v:val)' : 'string(strtrans(v:val))'
         let str = "join([\n" . indentn .
-        \ join(map(split(a:expr, '\n'), expr), ",\n" . indentn) .
+        \ join(map(split(a:expr, '\n', 1), expr), ",\n" . indentn) .
         \ "\n" . indent . '], "\n")'
       elseif s:string_raw
         let str = string(a:expr)
