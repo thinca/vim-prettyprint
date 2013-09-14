@@ -100,7 +100,7 @@ String					*prettyprint-format-rules-String*
 	join([
 	  'line1',
 	  'line2'
-	])
+	], "\n")
 
 Number					*prettyprint-format-rules-Number*
 Float					*prettyprint-format-rules-Float*
