@@ -18,4 +18,5 @@ endfunction
 
 " commands. {{{1
 command! -nargs=+ -bang -complete=expression PrettyPrint PP<bang> <args>
-command! -nargs=+ -bang -complete=expression PP call prettyprint#echo(PP(<args>), <bang>0, <q-args>)
+command! -nargs=+ -bang -complete=expression PP
+\        call prettyprint#echo(PP(<args>), <bang>0, <q-args>)
