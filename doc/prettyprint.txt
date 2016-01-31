@@ -65,7 +65,7 @@ OPTIONS						*prettyprint-options*
 g:prettyprint_indent				*g:prettyprint_indent*
 b:prettyprint_indent				*b:prettyprint_indent*
 	Width of indent.  If the type of value is String, |eval()| is applied.
-	The default value is "&l:shiftwidth".
+	The default value is "shiftwidth()" or "&l:shiftwidth".
 
 g:prettyprint_width				*g:prettyprint_width*
 b:prettyprint_width				*b:prettyprint_width*

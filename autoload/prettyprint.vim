@@ -8,7 +8,11 @@ set cpo&vim
 
 " options. {{{1
 if !exists('g:prettyprint_indent')  " {{{2
-  let g:prettyprint_indent = '&l:shiftwidth'
+  if exists('*shiftwidth')
+    let g:prettyprint_indent = 'shiftwidth()'
+  else
+    let g:prettyprint_indent = '&l:shiftwidth'
+  endif
 endif
 
 if !exists('g:prettyprint_width')  " {{{2
