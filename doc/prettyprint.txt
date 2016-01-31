@@ -20,7 +20,7 @@ CHANGELOG			|prettyprint-changelog|
 ==============================================================================
 INTRODUCTION					*prettyprint-introduction*
 
-*prettyprint* is a Vim plugin to prettyprint vim variable for debug.
+*prettyprint.vim* is a Vim plugin to prettyprint vim variable for debug.
 
 
 Requirements:
