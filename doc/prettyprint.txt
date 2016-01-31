@@ -80,7 +80,7 @@ b:prettyprint_string				*b:prettyprint_string*
 	See |prettyprint-format-rules-String| for details.
 	The default value is [] (empty list).
 
-g:prettyprint_show_expression	*g:prettyprint_show_expression*
+g:prettyprint_show_expression			*g:prettyprint_show_expression*
 	Show also expression not only evaluated value.
 	e.g.: If this variable is true,
 	":PP 1 + 1" outputs "1 + 1 = 2".
