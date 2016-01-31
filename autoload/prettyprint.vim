@@ -25,7 +25,7 @@ if !exists('g:prettyprint_show_expression')  " {{{2
 endif
 
 " functions. {{{1
-function! s:pp(expr, shift, width, stack)
+function! s:pp(expr, shift, width, stack) abort
   let indent = repeat(s:blank, a:shift)
   let indentn = indent . s:blank
 
@@ -114,13 +114,13 @@ function! s:pp(expr, shift, width, stack)
   return str
 endfunction
 
-function! s:option(name)
+function! s:option(name) abort
   let name = 'prettyprint_' . a:name
   let opt = has_key(b:, name) ? b:[name] : g:[name]
   return type(opt) == type('') ? eval(opt) : opt
 endfunction
 
-function! prettyprint#echo(str, msg, expr)
+function! prettyprint#echo(str, msg, expr) abort
   let str = a:str
   if g:prettyprint_show_expression
     let str = a:expr . ' = ' . str
@@ -134,7 +134,7 @@ function! prettyprint#echo(str, msg, expr)
   endif
 endfunction
 
-function! prettyprint#prettyprint(...)
+function! prettyprint#prettyprint(...) abort
   let s:indent = s:option('indent')
   let s:blank = repeat(' ', s:indent)
   let s:width = s:option('width') - 1

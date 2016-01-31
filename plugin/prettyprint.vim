@@ -8,11 +8,11 @@ if exists('g:loaded_prettyprint')
 endif
 let g:loaded_prettyprint = 1
 
-function! PrettyPrint(...)
+function! PrettyPrint(...) abort
   return call('prettyprint#prettyprint', a:000)
 endfunction
 
-function! PP(...)
+function! PP(...) abort
   return call('prettyprint#prettyprint', a:000)
 endfunction
 
