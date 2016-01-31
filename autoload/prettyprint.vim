@@ -3,9 +3,6 @@
 " Author : thinca <thinca+vim@gmail.com>
 " License: zlib License
 
-let s:save_cpo = &cpo
-set cpo&vim
-
 " options. {{{1
 if !exists('g:prettyprint_indent')  " {{{2
   if exists('*shiftwidth')
@@ -152,6 +149,3 @@ function! prettyprint#prettyprint(...)
   endfor
   return join(result, "\n")
 endfunction
-
-let &cpo = s:save_cpo
-unlet s:save_cpo
