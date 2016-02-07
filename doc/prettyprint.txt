@@ -1,6 +1,6 @@
 *prettyprint.txt*	Prettyprint vim variables.
 
-Version: 0.3.2
+Version: 0.3.3
 Author : thinca <thinca+vim@gmail.com>
 License: zlib License
 
@@ -176,6 +176,11 @@ LIMITATION					*prettyprint-limitation*
 
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
+
+0.3.3	2016-02-08
+	- Autoloadize.
+	- Fix for |g:prettyprint_string| option.
+	- Fix default value of |g:prettyprint_width|.
 
 0.3.2	2011-12-22
 	- Added |g:prettyprint_string| option.
