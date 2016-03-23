@@ -59,13 +59,14 @@ function! s:pp(expr, shift, width, stack) abort
       for key in sort(keys(a:expr))
         let skey = string(strtrans(key))
         let sep = ': '
-        let value = s:pp(a:expr[key], a:shift + 1, strlen(skey . sep), a:stack)
+        let Val = get(a:expr, key)  " Do not use a:expr[key] to avoid Partial
+        let valstr = s:pp(Val, a:shift + 1, strlen(skey . sep), a:stack)
         if s:indent < strlen(skey . sep) &&
-        \ width - s:indent < strlen(skey . sep . value) && value !~ "\n"
+        \ width - s:indent < strlen(skey . sep . valstr) && valstr !~ "\n"
           let sep = ":\n" . indentn . s:blank
         endif
-        call add(result, skey . sep . value)
-        unlet value
+        call add(result, skey . sep . valstr)
+        unlet Val
       endfor
       let oneline = '{' . join(result, ', ') . '}'
       if strlen(oneline) < width && oneline !~ "\n"
