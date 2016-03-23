@@ -146,6 +146,14 @@ Funcref					*prettyprint-format-rules-Funcref*
 	more, in addition, the file which the function was defined at last is
 	displayed by |:function-verbose|.
 
+Partial					*prettyprint-format-rules-Partial*
+	Currently, the {arglist} and {self} are omitted.  Only show the
+	{partial} flag as below.
+>
+	function('MyFunc', {partial})
+<
+	The option to show more detail may be added in the future.
+
 
 
 ==============================================================================
