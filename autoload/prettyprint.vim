@@ -78,36 +78,37 @@ function! s:pp(expr, shift, width, stack) abort
       let str = '{nested element ' . appear .'}'
     endif
 
-  else
-    if &verbose && type(a:expr) == type(function('tr'))
-      let funcname = matchstr(string(a:expr), '^function(''\zs.*\ze'')$')
-      if funcname =~# '^\d\+$'
-        let funcname = '{' . funcname . '}'
-      endif
-      if exists('*' . funcname)
-        redir => func
-        " Don't print a definition location if &verbose == 1.
-        silent! execute (&verbose - 1) 'verbose function' funcname
-        redir END
-        let str = func
-      else
-        let str = string(a:expr)
-      endif
-    elseif type(a:expr) == type('')
-      let str = a:expr
-      if a:expr =~# "\n" && s:string_split
-        let expr = s:string_raw ? 'string(v:val)' : 'string(strtrans(v:val))'
-        let str = "join([\n" . indentn .
-        \ join(map(split(a:expr, '\n', 1), expr), ",\n" . indentn) .
-        \ "\n" . indent . '], "\n")'
-      elseif s:string_raw
-        let str = string(a:expr)
-      else
-        let str = string(strtrans(a:expr))
-      endif
+  elseif type(a:expr) == type(function('tr'))
+    silent! let funcstr = string(a:expr)
+    let matched = matchlist(funcstr, '\C^function(''\(.\{-}\)''\()\?\)')
+    let funcname = matched[1]
+    let is_partial = matched[2] !=# ')'
+    let symbol = funcname =~# '^\d\+$' ? '{' . funcname . '}' : funcname
+    if &verbose && exists('*' . symbol)
+      redir => func
+      " Don't print a definition location if &verbose == 1.
+      silent! execute (&verbose - 1) 'verbose function' symbol
+      redir END
+      let str = func
+    elseif is_partial
+      let str = printf("function('%s', {partial})", funcname)
     else
-      let str = string(a:expr)
+      let str = printf("function('%s')", funcname)
     endif
+  elseif type(a:expr) == type('')
+    let str = a:expr
+    if a:expr =~# "\n" && s:string_split
+      let expr = s:string_raw ? 'string(v:val)' : 'string(strtrans(v:val))'
+      let str = "join([\n" . indentn .
+      \ join(map(split(a:expr, '\n', 1), expr), ",\n" . indentn) .
+      \ "\n" . indent . '], "\n")'
+    elseif s:string_raw
+      let str = string(a:expr)
+    else
+      let str = string(strtrans(a:expr))
+    endif
+  else
+    let str = string(a:expr)
   endif
 
   unlet a:stack[-1]
