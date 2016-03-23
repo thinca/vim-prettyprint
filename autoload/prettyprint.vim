@@ -24,6 +24,11 @@ if !exists('g:prettyprint_show_expression')  " {{{2
   let g:prettyprint_show_expression = 0
 endif
 
+let s:string_t = type('')
+let s:list_t = type([])
+let s:dict_t = type({})
+let s:func_t = type(function('tr'))
+
 " functions. {{{1
 function! s:pp(expr, shift, width, stack) abort
   let indent = repeat(s:blank, a:shift)
@@ -35,7 +40,7 @@ function! s:pp(expr, shift, width, stack) abort
   let width = s:width - a:width - s:indent * a:shift
 
   let str = ''
-  if type(a:expr) == type([])
+  if type(a:expr) == s:list_t
     if appear < 0
       let result = []
       for Expr in a:expr
@@ -53,7 +58,7 @@ function! s:pp(expr, shift, width, stack) abort
       let str = '[nested element ' . appear .']'
     endif
 
-  elseif type(a:expr) == type({})
+  elseif type(a:expr) == s:dict_t
     if appear < 0
       let result = []
       for key in sort(keys(a:expr))
@@ -79,7 +84,7 @@ function! s:pp(expr, shift, width, stack) abort
       let str = '{nested element ' . appear .'}'
     endif
 
-  elseif type(a:expr) == type(function('tr'))
+  elseif type(a:expr) == s:func_t
     silent! let funcstr = string(a:expr)
     let matched = matchlist(funcstr, '\C^function(''\(.\{-}\)''\()\?\)')
     let funcname = matched[1]
@@ -96,7 +101,7 @@ function! s:pp(expr, shift, width, stack) abort
     else
       let str = printf("function('%s')", funcname)
     endif
-  elseif type(a:expr) == type('')
+  elseif type(a:expr) == s:string_t
     let str = a:expr
     if a:expr =~# "\n" && s:string_split
       let expr = s:string_raw ? 'string(v:val)' : 'string(strtrans(v:val))'
