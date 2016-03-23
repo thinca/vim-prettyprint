@@ -1,6 +1,6 @@
 *prettyprint.txt*	Prettyprint vim variables.
 
-Version: 0.3.3
+Version: 0.3.4
 Author : thinca <thinca+vim@gmail.com>
 License: zlib License
 
@@ -184,6 +184,9 @@ LIMITATION					*prettyprint-limitation*
 
 ==============================================================================
 CHANGELOG					*prettyprint-changelog*
+
+0.3.4	2016-03-24
+	- Add Partial support.
 
 0.3.3	2016-02-08
 	- Autoloadize.
