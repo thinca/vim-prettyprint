@@ -89,7 +89,8 @@ function! s:pp(expr, shift, width, stack) abort
     let matched = matchlist(funcstr, '\C^function(''\(.\{-}\)''\()\?\)')
     let funcname = matched[1]
     let is_partial = matched[2] !=# ')'
-    let symbol = funcname =~# '^\d\+$' ? '{' . funcname . '}' : funcname
+    let symbol = funcname =~# '^\%(<lambda>\)\?\d\+$' ?
+    \                         '{"' . funcname . '"}' : funcname
     if &verbose && exists('*' . symbol)
       redir => func
       " Don't print a definition location if &verbose == 1.
